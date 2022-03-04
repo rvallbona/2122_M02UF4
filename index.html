@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<title>To Fast to Family HD</title>
+</head>
+<body>
+<h1>To Fast to Family HD</h1>
+<main>
+<section id="characters">
+	<ul id="characters-list">
+
+	</ul>
+</section>
+</main>
+<script>
+function write_characters_list (data)
+{
+	let list = "";
+	for (let i = 0; i < data.length; i++){
+		list  += "<li>"+data[i].name+"</li>";
+	}
+
+	document.getElementById("characters-list").innerHTML = list;
+}
+
+let characters_interval = setInterval(function(){
+	fetch("/characters")
+		.then(response => response.json())
+		.then(data => write_characters_list(data));
+}, 2000);
+
+//clearInterval(character_interval);
+</script>
+<body>
+
+</html>
+
