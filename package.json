@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rvallbona/2122_M02UF4.git"
+    "url": "git+https://github.com/rafaenti/2122_M02UF4.git"
   },
-  "author": "Ramon",
+  "author": "Rafa",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/rvallbona/2122_M02UF4/issues"
+    "url": "https://github.com/rafaenti/2122_M02UF4/issues"
   },
-  "homepage": "https://github.com/rvallbona/2122_M02UF4#readme",
+  "homepage": "https://github.com/rafaenti/2122_M02UF4#readme",
   "dependencies": {
     "mongodb": "^4.3.1"
   }
