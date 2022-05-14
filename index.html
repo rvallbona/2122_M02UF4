@@ -1,70 +1,66 @@
 <!doctype html>
+
 <html>
-<head>
-<title>To Fast to Family HD</title>
-</head>
-<body>
-<h1>To Fast to Family HD</h1>
-<main>
-<section id="characters">
-	<h2>Characters</h2>
-	<ul id="characters-list">
+	<head> <title>TFFHD</title> </head>
+	<body>
+		<h1> Too Fast Family HD</h1>
+		<main>
+			<section id="characters">
+				<ul id="characters-list">
+					<h2>Characters</h2>
+				</ul>
+			</section>
+			<section id="items">
+				<ul id="items-list">
+					<h2>Items</h2>
+				</ul>
+			</section>
+		</main>
 
-	</ul>
-</section>
-<section id="items">
-	<h2>Items</h2>
-	<ul id="items-list">
+		<script>
+			let list;
 
-	</ul>
-</section>
-</main>
-<script>
-	function load_data_items()
-{
-	fetch("/items")
-		.then(response => response.json())
-		.then(data => write_items_list(data));
+			//Load Characters
+			function fetchCharacters() {
+				fetch("/characters")
+				.then(response => response.json())
+				.then(data => charactersLoad(data));
+			}
+			function charactersLoad(data) {
+				list = "<h2>Characters</h2>";
+				for(let i=0; i<data.length; i++) {
+					list += '<li><a href="/characters/'+data[i]._id+'">'+data[i].name+'</a>	';
+					list += '<a href="/removeCharacter/'+data[i].id_character+'">X</a></li>';
+				}
+				document.getElementById("characters-list").innerHTML = list;
+			}
+			//Update Characters
+			let characters_interval= setInterval(function() {
+				fetchCharacters();
+			}, 2000);
+			fetchCharacters();
 
-}
-function write_items_list (data)
-{
-	let list = "";
-	for (let i = 0; i < data.length; i++){
-		list  += '<li><a href="/items/'+data[i]._id+'">'+data[i].name+'</a></li>';
-	}
 
-	document.getElementById("items-list").innerHTML = list;
-}
-function load_data_characters()
-{
-	fetch("/characters")
-		.then(response => response.json())
-		.then(data => write_characters_list(data));
+			//Load Items
+			function fetchItems() {
+				fetch("/items")
+				.then(response => response.json())
+				.then(data => itemsLoad(data));
+			}
+			function itemsLoad(data) {
+				list = "<h2>Items</h2>";
+				for(let i=0; i<data.length; i++) {
+					list += '<li><a href="/items/'+data[i]._id+'">'+data[i].item+'</a>	';
+					list += '<a href="/removeItem/'+data[i].id_item+'">X</a></li>';
+				}
+				document.getElementById("items-list").innerHTML = list;
+			}
+			//Update Items
+			let items_interval= setInterval(function() {
+				fetchItems();
+			}, 2000);
+			fetchItems();
 
-}
-function write_characters_list (data)
-{
-	let list = "";
-	for (let i = 0; i < data.length; i++){
-		list  += '<li><a href="/characters/'+data[i]._id+'">'+data[i].name+'</a></li>';
-	}
-
-	document.getElementById("characters-list").innerHTML = list;
-}
-
-let characters_interval = setInterval(function(){
-	load_data_characters();
-}, 2000);
-let items_interval = setInterval(function(){
-	load_data_items();
-}, 2000);
-load_data_items();
-load_data_characters();
-
-//clearInterval(character_interval);
-</script>
-<body>
-
+		</script>
+	</body>
 </html>
-
